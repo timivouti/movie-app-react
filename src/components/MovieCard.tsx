@@ -4,10 +4,12 @@ import {
   CardMedia,
   Grid,
   Typography,
-  withStyles
+  withStyles,
+  WithStyles
 } from "@material-ui/core/";
 import StarIcon from "@material-ui/icons/Star";
 import * as React from "react";
+import { Genre } from "../reducer/genre/types";
 import { dateParser } from "../utils/dateUtils";
 
 interface Movie {
@@ -27,89 +29,10 @@ interface Movie {
   release_date: string;
 }
 
-interface MovieProps {
+interface MovieProps extends WithStyles<typeof styles> {
   movie: Movie;
-  classes: any;
+  genres: Genre[];
 }
-
-const genres = [
-  {
-    id: 28,
-    name: "Action"
-  },
-  {
-    id: 12,
-    name: "Adventure"
-  },
-  {
-    id: 16,
-    name: "Animation"
-  },
-  {
-    id: 35,
-    name: "Comedy"
-  },
-  {
-    id: 80,
-    name: "Crime"
-  },
-  {
-    id: 99,
-    name: "Documentary"
-  },
-  {
-    id: 18,
-    name: "Drama"
-  },
-  {
-    id: 10751,
-    name: "Family"
-  },
-  {
-    id: 14,
-    name: "Fantasy"
-  },
-  {
-    id: 36,
-    name: "History"
-  },
-  {
-    id: 27,
-    name: "Horror"
-  },
-  {
-    id: 10402,
-    name: "Music"
-  },
-  {
-    id: 9648,
-    name: "Mystery"
-  },
-  {
-    id: 10749,
-    name: "Romance"
-  },
-  {
-    id: 878,
-    name: "Science Fiction"
-  },
-  {
-    id: 10770,
-    name: "TV Movie"
-  },
-  {
-    id: 53,
-    name: "Thriller"
-  },
-  {
-    id: 10752,
-    name: "War"
-  },
-  {
-    id: 37,
-    name: "Western"
-  }
-];
 
 const styles = {
   starContent: {
@@ -131,7 +54,7 @@ class MovieCard extends React.Component<MovieProps> {
       <Grid xs={12} sm={6} item={true}>
         <Card>
           <Grid container={true}>
-            <Grid xs={12} md={6}>
+            <Grid xs={12} md={6} item={true}>
               <CardMedia
                 className={this.props.classes.media}
                 component="img"
@@ -141,7 +64,7 @@ class MovieCard extends React.Component<MovieProps> {
                 title={this.props.movie.title}
               />
             </Grid>
-            <Grid xs={12} md={4}>
+            <Grid xs={12} md={4} item={true}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {this.props.movie.title}
@@ -162,7 +85,7 @@ class MovieCard extends React.Component<MovieProps> {
                 </Typography>
               </CardContent>
             </Grid>
-            <Grid xs={12} md={2}>
+            <Grid xs={12} md={2} item={true}>
               <CardContent className={this.props.classes.starContent}>
                 <StarIcon />
                 <Typography component="p">
@@ -179,7 +102,7 @@ class MovieCard extends React.Component<MovieProps> {
   private findGenre(ids: number[]): string {
     const foundGenres: string[] = [];
     ids.map(id => {
-      genres.forEach(genre => {
+      this.props.genres.forEach(genre => {
         if (genre.id === id) {
           foundGenres.push(genre.name);
         }
