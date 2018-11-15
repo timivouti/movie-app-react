@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Grid,
   Typography,
   withStyles
 } from "@material-ui/core/";
@@ -111,16 +112,6 @@ const genres = [
 ];
 
 const styles = {
-  card: {
-    display: "flex",
-    flex: 1,
-    flexDirection:
-      window.innerWidth > 400 ? ("row" as "row") : ("column" as "column"),
-    marginTop: "8px",
-    marginLeft: "8px",
-    marginRight: "8px"
-  },
-  content: {},
   starContent: {
     alignItems: "center",
     display: "flex",
@@ -137,39 +128,51 @@ class MovieCard extends React.Component<MovieProps> {
 
   public render() {
     return (
-      <Card className={this.props.classes.card}>
-        <CardMedia
-          className={this.props.classes.media}
-          component="img"
-          image={`http://image.tmdb.org/t/p/w185${
-            this.props.movie.poster_path
-          }`}
-          title={this.props.movie.title}
-        />
-        <div>
-          <CardContent className={this.props.classes.content}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {this.props.movie.title}
-            </Typography>
-            <Typography component="p">{this.props.movie.overview}</Typography>
-          </CardContent>
-          <CardContent>
-            <Typography component="p">
-              Genres: {this.findGenre(this.props.movie.genre_ids)}
-            </Typography>
-            <Typography component="p">
-              Language: {this.props.movie.original_language}
-            </Typography>
-            <Typography component="p">
-              Released: {dateParser(this.props.movie.release_date)}
-            </Typography>
-          </CardContent>
-        </div>
-        <CardContent className={this.props.classes.starContent}>
-          <StarIcon />
-          <Typography component="p">{this.props.movie.vote_average}</Typography>
-        </CardContent>
-      </Card>
+      <Grid xs={12} sm={6} item={true}>
+        <Card>
+          <Grid container={true}>
+            <Grid xs={12} md={6}>
+              <CardMedia
+                className={this.props.classes.media}
+                component="img"
+                image={`http://image.tmdb.org/t/p/w185${
+                  this.props.movie.poster_path
+                }`}
+                title={this.props.movie.title}
+              />
+            </Grid>
+            <Grid xs={12} md={4}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {this.props.movie.title}
+                </Typography>
+                <Typography component="p">
+                  {this.props.movie.overview}
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography component="p">
+                  Genres: {this.findGenre(this.props.movie.genre_ids)}
+                </Typography>
+                <Typography component="p">
+                  Language: {this.props.movie.original_language}
+                </Typography>
+                <Typography component="p">
+                  Released: {dateParser(this.props.movie.release_date)}
+                </Typography>
+              </CardContent>
+            </Grid>
+            <Grid xs={12} md={2}>
+              <CardContent className={this.props.classes.starContent}>
+                <StarIcon />
+                <Typography component="p">
+                  {this.props.movie.vote_average}
+                </Typography>
+              </CardContent>
+            </Grid>
+          </Grid>
+        </Card>
+      </Grid>
     );
   }
 

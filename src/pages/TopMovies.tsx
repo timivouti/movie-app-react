@@ -1,4 +1,4 @@
-import { withStyles } from "@material-ui/core/";
+import { Grid, withStyles, WithStyles } from "@material-ui/core/";
 import * as React from "react";
 import MovieCard from "../components/MovieCard";
 
@@ -74,17 +74,13 @@ const movieFour = {
   release_date: "2008-07-16"
 };
 
-interface TopMoviesProps {
+interface TopMoviesProps extends WithStyles<typeof styles> {
   classes: any;
 }
 
 const styles = {
   container: {
-    marginBottom: "8px"
-  },
-  cardContainer: {
-    display: window.innerWidth > 800 ? "flex" : "block",
-    justifyContent: "space-between"
+    margin: "8px"
   }
 };
 
@@ -96,14 +92,12 @@ class TopMovies extends React.Component<TopMoviesProps> {
   public render() {
     return (
       <div className={this.props.classes.container}>
-        <div className={this.props.classes.cardContainer}>
+        <Grid container={true} spacing={16}>
           <MovieCard movie={movie} />
           <MovieCard movie={movieTwo} />
-        </div>
-        <div className={this.props.classes.cardContainer}>
           <MovieCard movie={movieThree} />
           <MovieCard movie={movieFour} />
-        </div>
+        </Grid>
       </div>
     );
   }
