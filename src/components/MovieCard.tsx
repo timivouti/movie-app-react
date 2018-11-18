@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  createStyles,
   Grid,
   Typography,
   withStyles,
@@ -9,7 +10,7 @@ import {
 } from "@material-ui/core/";
 import StarIcon from "@material-ui/icons/Star";
 import * as React from "react";
-import { Genre } from "../reducer/genre/types";
+import { Genre } from "../reducer/movie/types";
 import { dateParser } from "../utils/dateUtils";
 
 interface Movie {
@@ -34,7 +35,7 @@ interface MovieProps extends WithStyles<typeof styles> {
   genres: Genre[];
 }
 
-const styles = {
+const styles = createStyles({
   starContent: {
     alignItems: "center",
     display: "flex",
@@ -42,7 +43,7 @@ const styles = {
     height: "24px"
   },
   media: {}
-};
+});
 
 class MovieCard extends React.Component<MovieProps> {
   constructor(props: MovieProps) {

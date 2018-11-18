@@ -15,23 +15,25 @@ export interface Movie {
   release_date: string;
 }
 
+export interface Genre {
+  id: number;
+  name: string;
+}
+
 export interface MovieState {
   movies: Movie[];
   loading: boolean;
+  genres: Genre[];
 }
 
 export const LOADING = "LOADING";
 export type LOADING = typeof LOADING;
 
-export const FETCH_SUCCESS = "@@movie/FETCH_SUCCESS";
-export type FETCH_SUCCESS = typeof FETCH_SUCCESS;
+export const FETCH_MOVIE_SUCCESS = "@@movie/FETCH_MOVIE_SUCCESS";
+export type FETCH_MOVIE_SUCCESS = typeof FETCH_MOVIE_SUCCESS;
+
+export const FETCH_GENRE_SUCCESS = "@@movie/FETCH_GENRE_SUCCESS";
+export type FETCH_GENRE_SUCCESS = typeof FETCH_GENRE_SUCCESS;
 
 export const FETCH_ERROR = "FETCH_ERROR";
 export type FETCH_ERROR = typeof FETCH_ERROR;
-
-interface IMovieAction {
-  type: string;
-  payload?: Movie[];
-}
-
-export type MovieAction = IMovieAction;

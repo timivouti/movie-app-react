@@ -7,18 +7,18 @@ import FullPageLoading from "../components/FullPageLoading";
 import { StoreState } from "../reducer/";
 import {
   fetchGenresAsync,
-  fetchTopMoviesAsync,
+  fetchNewMoviesAsync,
   MovieActions
 } from "../reducer/movie/actions";
 import { Genre, Movie } from "../reducer/movie/types";
 
-interface ITopMoviesProps extends WithStyles<typeof styles> {
+interface INewMoviesProps extends WithStyles<typeof styles> {
   genres: Genre[];
   loading: boolean;
   movies: Movie[];
 }
 
-interface ITopMoviesDispatchProps {
+interface INewMoviesDispatchProps {
   fetchMovies: () => Promise<void>;
   fetchGenres: () => void;
 }
@@ -34,10 +34,10 @@ const styles = createStyles({
   }
 });
 
-type TopMoviesProps = ITopMoviesProps & ITopMoviesDispatchProps;
+type NewMoviesProps = INewMoviesProps & INewMoviesDispatchProps;
 
-class TopMovies extends React.Component<TopMoviesProps> {
-  constructor(props: TopMoviesProps) {
+class NewMovies extends React.Component<NewMoviesProps> {
+  constructor(props: NewMoviesProps) {
     super(props);
   }
 
@@ -77,10 +77,10 @@ const mapDispatchToProps = (
 ) => {
   return {
     fetchGenres: () => dispatch(fetchGenresAsync()),
-    fetchMovies: () => dispatch(fetchTopMoviesAsync())
+    fetchMovies: () => dispatch(fetchNewMoviesAsync())
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TopMovies)
+  withStyles(styles)(NewMovies)
 );

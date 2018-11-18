@@ -1,29 +1,29 @@
+import { MovieActions } from "./actions";
 import {
-  MovieAction,
   MovieState,
-  FETCH_SUCCESS,
+  FETCH_GENRE_SUCCESS,
+  FETCH_MOVIE_SUCCESS,
   FETCH_ERROR,
   LOADING
 } from "./types";
 
-import { FETCH_SUCCESS as FETCH_GENRE_SUCCESS } from "../genre/types";
-
 const INITIAL_STATE: MovieState = {
   movies: [],
-  loading: false
+  loading: false,
+  genres: []
 };
 
 export default (
   state: MovieState = INITIAL_STATE,
-  action: MovieAction
+  action: MovieActions
 ): MovieState => {
   switch (action.type) {
     case LOADING:
       return { ...state, loading: true };
-    case FETCH_SUCCESS:
-      return { ...state, movies: action.payload!, loading: false };
+    case FETCH_MOVIE_SUCCESS:
+      return { ...state, movies: action.payload, loading: false };
     case FETCH_GENRE_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, genres: action.payload, loading: false };
     case FETCH_ERROR:
       return { ...state, loading: false };
     default:
