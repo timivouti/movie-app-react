@@ -12,3 +12,11 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 app.listen(port);
+
+// GITIGNORE
+// src/*
+// public/*
+// build/static/css/*.map
+// build/static/js/*.map
+// npm run start
+// node server.js
