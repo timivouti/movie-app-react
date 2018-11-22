@@ -3,6 +3,7 @@ import {
   createStyles,
   Drawer,
   Divider,
+  IconButton,
   InputBase,
   List,
   ListItem,
@@ -11,7 +12,6 @@ import {
   ListSubheader,
   Toolbar,
   Typography,
-  IconButton,
   withStyles,
   WithStyles
 } from "@material-ui/core/";
@@ -25,6 +25,7 @@ import * as React from "react";
 import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import * as _ from "lodash";
 
 const styles = (theme: any) =>
   createStyles({
@@ -87,6 +88,7 @@ interface INavBarProps extends WithStyles<typeof styles> {}
 
 interface NavBarState {
   drawer: boolean;
+  searchValue?: string;
 }
 
 type NavBarProps = INavBarProps & RouteComponentProps<{}>;
@@ -96,7 +98,8 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     super(props);
 
     this.state = {
-      drawer: false
+      drawer: false,
+      searchValue: undefined
     };
   }
 
@@ -122,7 +125,9 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
             </Typography>
             <div className={this.props.classes.search}>
               <div className={this.props.classes.searchIcon}>
-                <SearchIcon />
+                <IconButton color="inherit" aria-label="Menu">
+                  <SearchIcon />
+                </IconButton>
               </div>
               <InputBase
                 placeholder="Search…"
@@ -130,6 +135,8 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                   root: this.props.classes.inputRoot,
                   input: this.props.classes.inputInput
                 }}
+                onChange={this.handleChange}
+                onKeyPress={this.handlekeyPress}
               />
             </div>
           </Toolbar>
@@ -180,8 +187,6 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                   </ListItemIcon>
                   <ListItemText primary="Upcoming" />
                 </ListItem>
-                <ListSubheader>Tv-Series</ListSubheader>
-                <Divider />
               </List>
             </div>
           </Drawer>
@@ -201,6 +206,29 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
   private handlePush = (route: string) => {
     this.closeDrawer();
     this.props.history.push(route);
+  };
+
+  private handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    this.setState({ searchValue: event.target.value });
+    if (event.target.value && event.target.value.length > 0) {
+      const debounce = _.debounce(
+        () => this.props.history.push(`/search/${this.state.searchValue}`),
+        2000
+      );
+      debounce();
+    }
+  };
+
+  private handlekeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (
+      this.state.searchValue &&
+      this.state.searchValue.length > 0 &&
+      event.key === "Enter"
+    ) {
+      this.props.history.push(`/search/${this.state.searchValue}`);
+    }
   };
 }
 

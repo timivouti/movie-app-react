@@ -59,7 +59,7 @@ class MovieCard extends React.Component<MovieProps> {
               <CardMedia
                 className={this.props.classes.media}
                 component="img"
-                image={`http://image.tmdb.org/t/p/w185${
+                image={`https://image.tmdb.org/t/p/w185${
                   this.props.movie.poster_path
                 }`}
                 title={this.props.movie.title}

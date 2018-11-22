@@ -133,3 +133,25 @@ export const fetchGenresAsync = (): ((
     }
   };
 };
+
+export const fetchSearchMoviesAsync = (
+  value: string
+): ((dispatch: Dispatch<MovieActions>) => Promise<void>) => {
+  return async (dispatch: Dispatch<MovieActions>) => {
+    dispatch({ type: LOADING });
+    try {
+      const result = await fetch(
+        `${ROOT_URL}search/movie${API_KEY}${LANGUAGE}&query=${value}`
+      );
+      if (result.ok) {
+        const res = await result.json();
+        const movies = res.results as Movie[];
+        dispatch({ type: FETCH_MOVIE_SUCCESS, payload: movies });
+      } else {
+        dispatch({ type: FETCH_ERROR });
+      }
+    } catch (err) {
+      dispatch({ type: FETCH_ERROR });
+    }
+  };
+};
