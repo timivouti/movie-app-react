@@ -15,10 +15,26 @@ const RouterComponent: React.SFC = () => {
         <NavBar />
         <Suspense fallback={<FullPageLoading />}>
           <Switch>
-            <Route exact path="/" component={TopMovies} />
-            <Route exact path="/newmovies" component={NewMovies} />
-            <Route exact path="/popularmovies" component={PopularMovies} />
-            <Route exact path="/upcomingmovies" component={UpcomingMovies} />
+            <Route
+              exact
+              path="/"
+              component={(props: any) => <TopMovies {...props} />}
+            />
+            <Route
+              exact
+              path="/newmovies"
+              component={(props: any) => <NewMovies {...props} />}
+            />
+            <Route
+              exact
+              path="/popularmovies"
+              component={(props: any) => <PopularMovies {...props} />}
+            />
+            <Route
+              exact
+              path="/upcomingmovies"
+              component={(props: any) => <UpcomingMovies {...props} />}
+            />
           </Switch>
         </Suspense>
       </div>

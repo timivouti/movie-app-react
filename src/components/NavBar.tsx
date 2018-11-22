@@ -3,6 +3,7 @@ import {
   createStyles,
   Drawer,
   Divider,
+  InputBase,
   List,
   ListItem,
   ListItemIcon,
@@ -14,29 +15,73 @@ import {
   withStyles,
   WithStyles
 } from "@material-ui/core/";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import StarIcon from "@material-ui/icons/Star";
 import UpdateIcon from "@material-ui/icons/Update";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import ScheduleIcon from "@material-ui/icons/Schedule";
+import SearchIcon from "@material-ui/icons/Search";
 import * as React from "react";
 import { withRouter } from "react-router";
 import { RouteComponentProps } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const styles = createStyles({
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1,
-    marginLeft: 8
-  },
-  menuButton: {},
-  menuContainer: { zIndex: 999 },
-  list: {
-    width: 250
-  }
-});
+const styles = (theme: any) =>
+  createStyles({
+    root: {
+      flexGrow: 1
+    },
+    grow: {
+      flexGrow: 1,
+      marginLeft: 8
+    },
+    menuButton: {},
+    menuContainer: { zIndex: 999 },
+    list: {
+      width: 250
+    },
+    search: {
+      position: "relative",
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      "&:hover": {
+        backgroundColor: fade(theme.palette.common.white, 0.25)
+      },
+      marginLeft: 0,
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing.unit,
+        width: "auto"
+      }
+    },
+    searchIcon: {
+      width: theme.spacing.unit * 9,
+      height: "100%",
+      position: "absolute",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    inputRoot: {
+      color: "inherit",
+      width: "100%"
+    },
+    inputInput: {
+      paddingTop: theme.spacing.unit,
+      paddingRight: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit * 10,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        width: 120,
+        "&:focus": {
+          width: 200
+        }
+      }
+    }
+  });
 
 interface INavBarProps extends WithStyles<typeof styles> {}
 
@@ -75,6 +120,18 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
             >
               Movie App
             </Typography>
+            <div className={this.props.classes.search}>
+              <div className={this.props.classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: this.props.classes.inputRoot,
+                  input: this.props.classes.inputInput
+                }}
+              />
+            </div>
           </Toolbar>
         </AppBar>
         <div>
