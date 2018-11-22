@@ -7,6 +7,9 @@
     "@material-ui/icons": "^3.0.1",
     "@types/react-redux": "^6.0.9",
     "@types/react-router-dom": "^4.3.1",
+    "express": "^4.16.4",
+    "express-favicon": "^2.0.1",
+    "path": "^0.12.7",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.1",
@@ -16,7 +19,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
+    "start": "node server.js",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
