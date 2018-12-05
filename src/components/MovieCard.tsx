@@ -10,30 +10,17 @@ import {
 } from "@material-ui/core/";
 import StarIcon from "@material-ui/icons/Star";
 import * as React from "react";
-import { Genre } from "../reducer/movie/types";
+import { Genre, Movie } from "../reducer/movie/types";
 import { dateParser } from "../utils/dateUtils";
 
-interface Movie {
-  vote_count: number;
-  id: number;
-  video: boolean;
-  vote_average: number;
-  title: string;
-  popularity: number;
-  poster_path: string;
-  original_language: string;
-  original_title: string;
-  genre_ids: number[];
-  backdrop_path: string;
-  adult: boolean;
-  overview: string;
-  release_date: string;
-}
+// Component props extends material-ui styles as props
 
 interface MovieProps extends WithStyles<typeof styles> {
   movie: Movie;
   genres: Genre[];
 }
+
+// material-ui styling
 
 const styles = createStyles({
   starContent: {
@@ -44,6 +31,9 @@ const styles = createStyles({
   },
   media: {}
 });
+
+// Class component
+// uses dateParser-function to get date as DD.MM.YYYY
 
 class MovieCard extends React.Component<MovieProps> {
   constructor(props: MovieProps) {
@@ -99,6 +89,8 @@ class MovieCard extends React.Component<MovieProps> {
       </Grid>
     );
   }
+
+  // pushes found genres to array and returns them as string with ", " between
 
   private findGenre(ids: number[]): string {
     const foundGenres: string[] = [];

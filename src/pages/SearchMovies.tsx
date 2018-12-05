@@ -13,16 +13,22 @@ import {
 } from "../reducer/movie/actions";
 import { Genre, Movie } from "../reducer/movie/types";
 
+// Component props extends material-ui props
+
 interface ISearchMoviesProps extends WithStyles<typeof styles> {
   genres: Genre[];
   loading: boolean;
   movies: Movie[];
 }
 
+// Redux dispatch props
+
 interface ISearchMoviesDispatchProps {
   fetchMovies: (value: string) => Promise<void>;
   fetchGenres: () => void;
 }
+
+// material-ui styling
 
 const styles = createStyles({
   container: {
@@ -34,6 +40,8 @@ const styles = createStyles({
     marginTop: 15
   }
 });
+
+// Combining Component and Redux dispatch props with React Router props
 
 type SearchMoviesProps = ISearchMoviesProps &
   ISearchMoviesDispatchProps &
@@ -48,6 +56,9 @@ class SearchMovies extends React.Component<SearchMoviesProps> {
     this.fetch(this.props.match.params.value);
   }
 
+  // checks if the search value, movies or genres are different from before
+  // if one of them is different updates component
+
   public shouldComponentUpdate(nextProps: any) {
     if (this.props.match.params.value != nextProps.match.params.value) {
       this.fetch(nextProps.match.params.value);
@@ -60,7 +71,6 @@ class SearchMovies extends React.Component<SearchMoviesProps> {
   }
 
   public render() {
-    console.log(this.props.match.params);
     return (
       <div className={this.props.classes.container}>
         {this.props.loading && <FullPageLoading />}
@@ -78,6 +88,8 @@ class SearchMovies extends React.Component<SearchMoviesProps> {
     );
   }
 
+  // fetches movies if there are search value and its length is > 0
+
   private fetch = (value?: string) => {
     if (value && value.length > 0) {
       this.props.fetchMovies(value).then(() => this.props.fetchGenres());
@@ -87,6 +99,8 @@ class SearchMovies extends React.Component<SearchMoviesProps> {
   };
 }
 
+// Redux state
+
 const mapStateToProps = (state: StoreState) => {
   return {
     genres: state.movie.genres,
@@ -94,6 +108,8 @@ const mapStateToProps = (state: StoreState) => {
     movies: state.movie.movies
   };
 };
+
+// Redux functions
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<StoreState, any, MovieActions>
@@ -103,6 +119,8 @@ const mapDispatchToProps = (
     fetchMovies: (value: string) => dispatch(fetchSearchMoviesAsync(value))
   };
 };
+
+// Combining redux state and functions to component
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(SearchMovies)

@@ -27,6 +27,8 @@ import { RouteComponentProps } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import * as _ from "lodash";
 
+// material-ui styling
+
 const styles = (theme: any) =>
   createStyles({
     root: {
@@ -84,16 +86,27 @@ const styles = (theme: any) =>
     }
   });
 
+// extending material-ui props
+
 interface INavBarProps extends WithStyles<typeof styles> {}
+
+// declaring component state interface
 
 interface NavBarState {
   drawer: boolean;
   searchValue?: string;
 }
 
+// compining componentprops with React Router Component Props, so we can redirect user
+
 type NavBarProps = INavBarProps & RouteComponentProps<{}>;
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
+  private debounce = _.debounce(
+    () => this.props.history.push(`/search/${this.state.searchValue}`),
+    1000
+  );
+
   constructor(props: NavBarProps) {
     super(props);
 
@@ -213,11 +226,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
   ) => {
     this.setState({ searchValue: event.target.value });
     if (event.target.value && event.target.value.length > 0) {
-      const debounce = _.debounce(
-        () => this.props.history.push(`/search/${this.state.searchValue}`),
-        2000
-      );
-      debounce();
+      this.debounce();
     }
   };
 

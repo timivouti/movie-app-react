@@ -13,6 +13,8 @@ const API_KEY = "?api_key=00297accea2395b7c2d46ca8feb72e99";
 const ROOT_URL = "https://api.themoviedb.org/3/";
 const LANGUAGE = "&language=en-US";
 
+// Redux action typing using createAction-function
+
 const Actions = {
   fetchError: () => createAction(FETCH_ERROR),
   fetchMovieSuccess: (movies: Movie[]) =>
@@ -22,7 +24,11 @@ const Actions = {
   loading: () => createAction(LOADING)
 };
 
+// Combining all action types as MovieActions
+
 export type MovieActions = ActionsUnion<typeof Actions>;
+
+// Fetch new movies function
 
 export const fetchNewMoviesAsync = (): ((
   dispatch: Dispatch<MovieActions>
@@ -46,6 +52,8 @@ export const fetchNewMoviesAsync = (): ((
   };
 };
 
+// Fetch popular movies function
+
 export const fetchPopularMoviesAsync = (): ((
   dispatch: Dispatch<MovieActions>
 ) => Promise<void>) => {
@@ -67,6 +75,8 @@ export const fetchPopularMoviesAsync = (): ((
     }
   };
 };
+
+// Fetch top movies function
 
 export const fetchTopMoviesAsync = (): ((
   dispatch: Dispatch<MovieActions>
@@ -90,6 +100,8 @@ export const fetchTopMoviesAsync = (): ((
   };
 };
 
+// Fetch upcoming movies function
+
 export const fetchUpcomingMoviesAsync = (): ((
   dispatch: Dispatch<MovieActions>
 ) => Promise<void>) => {
@@ -112,6 +124,8 @@ export const fetchUpcomingMoviesAsync = (): ((
   };
 };
 
+// Fetch genres function
+
 export const fetchGenresAsync = (): ((
   dispatch: Dispatch<MovieActions>
 ) => Promise<void>) => {
@@ -133,6 +147,8 @@ export const fetchGenresAsync = (): ((
     }
   };
 };
+
+// Fetch movies with search value
 
 export const fetchSearchMoviesAsync = (
   value: string

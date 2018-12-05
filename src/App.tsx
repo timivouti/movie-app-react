@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./Router";
 import reducers from "./reducer";
 
+// Combines react router to the app
+// Combines redux state with redux-thunk middleware
+
 class App extends React.Component {
   public render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));

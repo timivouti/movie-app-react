@@ -7,11 +7,15 @@ import {
   LOADING
 } from "./types";
 
+// Redux initial state value
+
 const INITIAL_STATE: MovieState = {
   movies: [],
   loading: false,
   genres: []
 };
+
+// Returning moviereducer with changing state depending on the action type
 
 export default (
   state: MovieState = INITIAL_STATE,

@@ -1,3 +1,5 @@
+// Declaring movie interface
+
 export interface Movie {
   vote_count: number;
   id: number;
@@ -15,10 +17,14 @@ export interface Movie {
   release_date: string;
 }
 
+// Declaring genre interface
+
 export interface Genre {
   id: number;
   name: string;
 }
+
+// Declaring Movie State interface
 
 export interface MovieState {
   movies: Movie[];

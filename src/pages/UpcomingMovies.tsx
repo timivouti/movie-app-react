@@ -12,16 +12,22 @@ import {
 } from "../reducer/movie/actions";
 import { Genre, Movie } from "../reducer/movie/types";
 
+// Component props extends material-ui style props
+
 interface IUpcomingMoviesProps extends WithStyles<typeof styles> {
   genres: Genre[];
   loading: boolean;
   movies: Movie[];
 }
 
+// Redux dispatch props
+
 interface IUpcomingMoviesDispatchProps {
   fetchMovies: () => Promise<void>;
   fetchGenres: () => void;
 }
+
+// material-ui styling
 
 const styles = createStyles({
   container: {
@@ -33,6 +39,8 @@ const styles = createStyles({
     marginTop: 15
   }
 });
+
+// Combines Component props and Redux dispatch props
 
 type UpcomingMoviesProps = IUpcomingMoviesProps & IUpcomingMoviesDispatchProps;
 
@@ -64,6 +72,8 @@ class UpcomingMovies extends React.Component<UpcomingMoviesProps> {
   }
 }
 
+// Redux state
+
 const mapStateToProps = (state: StoreState) => {
   return {
     genres: state.movie.genres,
@@ -71,6 +81,8 @@ const mapStateToProps = (state: StoreState) => {
     movies: state.movie.movies
   };
 };
+
+// Redux functions
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<StoreState, any, MovieActions>
@@ -80,6 +92,8 @@ const mapDispatchToProps = (
     fetchMovies: () => dispatch(fetchUpcomingMoviesAsync())
   };
 };
+
+// Combining redux state and functions to component
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(UpcomingMovies)

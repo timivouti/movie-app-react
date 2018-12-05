@@ -3,11 +3,17 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import FullPageLoading from "./components/FullPageLoading";
+
+// React lazy loading the pages
+// More info: https://reactjs.org/docs/code-splitting.html
+
 const NewMovies = lazy(() => import("./pages/NewMovies"));
 const PopularMovies = lazy(() => import("./pages/PopularMovies"));
 const TopMovies = lazy(() => import("./pages/TopMovies"));
 const UpcomingMovies = lazy(() => import("./pages/UpcomingMovies"));
 const SearchMovies = lazy(() => import("./pages/SearchMovies"));
+
+// React router routes, while loading pages shows FullPageLoading Component
 
 const RouterComponent: React.SFC = () => {
   return (
