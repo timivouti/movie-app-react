@@ -15,7 +15,7 @@ Project is made with React using TypeScript (JavaScript with types)
 
 ## Demo
 
-Open [https:https://evening-eyrie-11555.herokuapp.com/](https://evening-eyrie-11555.herokuapp.com/)
+Open [https://evening-eyrie-11555.herokuapp.com/](https://evening-eyrie-11555.herokuapp.com/)
 
 ## How to install and run locally
 
