@@ -1,4 +1,11 @@
-import { createStyles, Grid, withStyles, WithStyles } from "@material-ui/core/";
+import {
+  Divider,
+  createStyles,
+  Grid,
+  Typography,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/";
 import * as React from "react";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
@@ -57,7 +64,16 @@ class NewMovies extends React.Component<NewMoviesProps> {
     return (
       <div className={this.props.classes.container}>
         {this.props.loading && <FullPageLoading />}
-        <Grid container={true} spacing={16}>
+        <Grid container={true} spacing={16} style={{ marginBottom: 20 }}>
+          <Grid item={true} xs={12}>
+            <Typography
+              variant="title"
+              style={{ textAlign: "center", lineHeight: "3em" }}
+            >
+              New Movies
+            </Typography>
+            <Divider />
+          </Grid>
           {!this.props.loading &&
             this.props.movies &&
             this.props.movies.length > 0 &&
