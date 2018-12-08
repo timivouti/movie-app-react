@@ -3,14 +3,19 @@
 Uses Movie Database API [https://developers.themoviedb.org](https://developers.themoviedb.org)
 
 Shows User:
-- Top Movies
-- Popular Movies
-- New Movies
-- Upcoming Movies
+
+* Top Movies
+* Popular Movies
+* New Movies
+* Upcoming Movies
 
 User can search for movies as well
 
 Project is made with React using TypeScript (JavaScript with types)
+
+## Demo
+
+Open [https:https://evening-eyrie-11555.herokuapp.com/](https://evening-eyrie-11555.herokuapp.com/)
 
 ## How to install and run locally
 
